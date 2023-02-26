@@ -1,0 +1,8 @@
+.nfs*
+.o
+.a
+.out
+.swp
+.DS_Store
+minishell
+*.dSYM
