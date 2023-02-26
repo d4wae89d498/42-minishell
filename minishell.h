@@ -112,7 +112,7 @@ void			ft_bash_sigint(int sign);
 
 //ft_minishell.c
 int				ft_cycle_cmd(t_data *data);
-void			ft_initialize(t_data *data, char **envp);
+int				ft_initialize(t_data *data, char **envp);
 void			ft_wait_for_kids(t_data *data);
 void			ft_clear_mem(t_data *data);
 
@@ -218,7 +218,7 @@ int				ft_is_number_only(char *input);
 t_envp			*ft_copy_envp(char **envp);
 t_envp			*ft_lstnew(char *content);
 t_envp			*ft_lstlast(t_envp *lst);
-void			ft_lstadd_back(t_envp **lst, t_envp *new);
+t_envp			*ft_lstadd_back(t_envp **lst, t_envp *new);
 void			ft_delete_list(t_envp **lst);
 
 //ft_env1.c
@@ -252,7 +252,7 @@ void			ft_add_quotes(t_envp *envp);
 //ft_export1.c
 void			ft_sort_list(t_envp **envp);
 void			ft_swap(t_envp **first, t_envp *swap_a);
-void			ft_change_envp(t_data *data, char *var);
+int				ft_change_envp(t_data *data, char *var);
 
 //ft_unset.c
 int				ft_unset(t_data *data, t_command *cmd);

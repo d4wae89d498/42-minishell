@@ -20,18 +20,26 @@ int	ft_export(t_data *data, t_command *cmd)
 	return (RETURN_SUCCESS);
 }
 
-void	ft_change_envp(t_data *data, char *var)
+int	ft_change_envp(t_data *data, char *var)
 {
 	t_envp	*tmp;
+	char	*out;
 
+	out = ft_string_dup(var);
+	if (!out)
+		return (1);
 	tmp = ft_get_envp_element(data->envp, var);
 	if (tmp)
 	{
 		free((void *) tmp->var);
-		tmp->var = ft_string_dup(var);
+		tmp->var = out;
 	}
-	else
-		ft_lstadd_back(&data->envp, ft_lstnew(var));
+	else if (!ft_lstadd_back(&data->envp, ft_lstnew(out)))
+	{
+		free(out);
+		return (1);
+	}
+	return (0);
 }
 
 int	ft_check_validity(char *argv)

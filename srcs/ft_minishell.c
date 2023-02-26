@@ -4,24 +4,26 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data		data;
 
-	ft_initialize(&data, envp);
-	ft_set_parent_interactive();
 	(void) argc;
 	(void) argv;
-	while (1)
+	if (!ft_initialize(&data, envp))
 	{
-		data.r_line = readline(PROMPT);
-		if (data.r_line == NULL)
-			break ;
-		if (ft_strlen(data.r_line) > 0)
-			add_history(data.r_line);
-		ft_parser(&data);
-		if (ft_do_valid_redirections(&data) == RETURN_SUCCESS)
-			if (ft_cycle_cmd(&data) == RETURN_EXIT)
+		ft_set_parent_interactive();
+		while (1)
+		{
+			data.r_line = readline(PROMPT);
+			if (data.r_line == NULL)
 				break ;
-		ft_wait_for_kids(&data);
-		free((void *) data.r_line);
-		ft_delete_cmd(&data.c_line);
+			if (ft_strlen(data.r_line) > 0)
+				add_history(data.r_line);
+			ft_parser(&data);
+			if ((ft_do_valid_redirections(&data) == RETURN_SUCCESS) 
+				&& (ft_cycle_cmd(&data) == RETURN_EXIT))
+					break ;
+			ft_wait_for_kids(&data);
+			free((void *) data.r_line);
+			ft_delete_cmd(&data.c_line);
+		}
 	}
 	ft_clear_mem(&data);
 	return (data.errnum);
@@ -71,7 +73,7 @@ void	ft_wait_for_kids(t_data *data)
 	ft_set_parent_interactive();
 }
 
-void	ft_initialize(t_data *data, char **envp)
+int	ft_initialize(t_data *data, char **envp)
 {
 	char	*output;
 	t_envp	*tmp_envp;
@@ -80,23 +82,32 @@ void	ft_initialize(t_data *data, char **envp)
 	data->r_line = NULL;
 	data->errnum = 0;
 	data->envp = ft_copy_envp(envp);
+	if (!data->envp)
+		return (1);
 	tmp_envp = ft_get_envp_element(data->envp, "PATH");
-	if (!tmp_envp)
-		ft_change_envp(data, DEFAULT_PATH);
+	if (!tmp_envp && ft_change_envp(data, DEFAULT_PATH))
+			return (1);
 	tmp_envp = ft_get_envp_element(data->envp, "PWD");
 	if (!tmp_envp)
 	{
 		output = (char *) malloc(BUFFER_SIZE);
 		if (!output)
-			return ;
+			return (1);
 		getcwd(output, BUFFER_SIZE);
 		output = ft_realloc("PWD=", output, 0, 1);
-		ft_change_envp(data, output);
+		if (!output)
+			return (1);
 		data->pwd = output;
+		if (ft_change_envp(data, output))
+			return (1);
 	}
 	else
+	{
 		data->pwd = ft_string_dup(tmp_envp->var);
-	ft_change_envp(data, "SHELL=EZIO & MARC MINISHELL!");
+		if (!(data->pwd))
+			return (0);
+	}
+	return (ft_change_envp(data, "SHELL=EZIO & MARC MINISHELL!"));
 }
 
 int	ft_cycle_cmd(t_data *data)
