@@ -25,6 +25,11 @@ int	main(int argc, char **argv, char **envp)
 			ft_delete_cmd(&data.c_line);
 		}
 	}
+	else
+	{
+		printf("Allocation error.\n");
+		data.errnum = 1;
+	}
 	ft_clear_mem(&data);
 	return (data.errnum);
 }
