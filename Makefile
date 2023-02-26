@@ -28,6 +28,7 @@ SRCS		:=	ft_minishell.c 				\
 				errors/ft_error1.c 			\
 				errors/ft_error2.c 			\
 											\
+				executor/ft_read_loop.c 	\
 				executor/ft_commands0.c 	\
 				executor/ft_commands1.c 	\
 				executor/ft_executable.c 	\

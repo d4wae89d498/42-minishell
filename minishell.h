@@ -98,6 +98,15 @@ typedef struct s_parser {
 	int					result;
 }				t_parser;
 
+//ft_minishell.c
+int				ft_initialize(t_data *data, char **envp);
+void			ft_clear_mem(t_data *data);
+
+//ft_read_loop.c
+int 			ft_read_loop(t_data *data);
+int				ft_cycle_cmd(t_data *data);
+void			ft_wait_for_kids(t_data *data);
+
 //ft_signals.c
 void			ft_set_parent_interactive(void);
 void			ft_set_parent_active(void);
@@ -109,12 +118,6 @@ void			ft_parent_interactive_sigint(int sign);
 void			ft_parent_active_sigint(int sign);
 void			ft_parent_active_sigquit(int sign);
 void			ft_bash_sigint(int sign);
-
-//ft_minishell.c
-int				ft_cycle_cmd(t_data *data);
-int				ft_initialize(t_data *data, char **envp);
-void			ft_wait_for_kids(t_data *data);
-void			ft_clear_mem(t_data *data);
 
 //ft_error0.c
 int				ft_print_error(t_command *cmd, int errnum, char *filename);
