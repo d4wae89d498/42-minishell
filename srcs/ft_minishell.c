@@ -39,15 +39,15 @@ static int	ft_initialize(t_data *data, char **envp)
 	data->c_line = NULL;
 	data->r_line = NULL;
 	data->errnum = 0;
-	data->envp = ft_copy_envp(envp);
-	if (!data->envp)
-		return (1);
+	data->envp = 0;
+	if (envp && *envp)
+		data->envp = ft_copy_envp(envp);
 	tmp_envp = ft_get_envp_element(data->envp, "PATH");
-	if (!tmp_envp && ft_change_envp(data, DEFAULT_PATH))
-		return (1);
+	if (!tmp_envp)
+		ft_change_envp(data, DEFAULT_PATH);
 	tmp_envp = ft_get_envp_element(data->envp, "PWD");
-	if (!tmp_envp && ft_set_pwd(data))
-		return (1);
+	if (!tmp_envp)
+		ft_set_pwd(data);
 	else
 	{
 		data->pwd = ft_string_dup(tmp_envp->var);

@@ -17,6 +17,8 @@ void	ft_inside_d_quote(t_parse *check, char *input, t_data *data)
 	if (check->i > 0)
 		ft_add_string(check, input);
 	check->start = check->i + 1;
+	if (!input[check->i + 1])
+		return ;
 	check->i++;
 	while (input[check->i])
 	{
@@ -39,6 +41,8 @@ void	ft_inside_s_quote(t_parse *check, char *input)
 	if (check->i > 0)
 		ft_add_string(check, input);
 	check->start = check->i + 1;
+	if (!input[check->i + 1])
+		return ;
 	check->i++;
 	while (input[check->i])
 	{
