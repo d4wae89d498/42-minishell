@@ -44,10 +44,10 @@ void	ft_delete_envp_elem(t_envp **first, t_envp *to_del)
 	tmp = *first;
 	while (tmp && tmp != to_del && tmp->next != to_del)
 		tmp = tmp->next;
-	free((void *) to_del->var);
+	ft_sfree((void *) to_del->var);
 	if (*first == to_del)
 		*first = to_del->next;
 	else
 		tmp->next = to_del->next;
-	free((void *) to_del);
+	ft_sfree((void *) to_del);
 }

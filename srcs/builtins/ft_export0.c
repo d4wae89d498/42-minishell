@@ -41,7 +41,7 @@ int	ft_change_envp(t_data *data, char *var)
 	tmp = ft_get_envp_element(data->envp, var);
 	if (tmp)
 	{
-		free((void *) tmp->var);
+		ft_sfree((void *) tmp->var);
 		tmp->var = ft_string_dup(var);
 		if (!tmp->var)
 			return (0);

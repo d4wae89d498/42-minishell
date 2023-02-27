@@ -37,7 +37,7 @@ int	ft_cd(t_data *data, t_command *cmd)
 		chdir(cmd->argv->var);
 		old_pwd = ft_realloc("OLDPWD=", ft_getenv("PWD", data->envp), 0, 0);
 		ft_change_envp(data, old_pwd);
-		free(old_pwd);
+		ft_sfree(old_pwd);
 		if (cmd->argv->var[0] == '/')
 			ft_absolute_path(data, cmd);
 		else
@@ -51,7 +51,7 @@ static void	ft_absolute_path(t_data *data, t_command *cmd)
 {
 	int	len;
 
-	free(data->pwd);
+	ft_sfree(data->pwd);
 	data->pwd = ft_realloc("PWD=", cmd->argv->var, 0, 0);
 	len = ft_strlen(data->pwd) - 1;
 	if (data->pwd[len] == '/')
@@ -108,6 +108,6 @@ static char	*ft_cd_remove_folder(char *path)
 		output = ft_string_dup("PWD=/");
 	else
 		output = ft_get_substring(path, 0, len);
-	free(path);
+	ft_sfree(path);
 	return (output);
 }

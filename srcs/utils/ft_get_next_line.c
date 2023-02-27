@@ -22,14 +22,13 @@ char	*ft_get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	output = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	output = (char *) ft_malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!output)
 		return (NULL);
 	output[0] = '\0';
 	return (ft_gnl_handling(buffer, fd, output));
 }
 
-// todo : 3 return values
 static char	*ft_gnl_handling(char *buffer, int fd, char *output)
 {
 	ssize_t	read_result;
@@ -43,15 +42,15 @@ static char	*ft_gnl_handling(char *buffer, int fd, char *output)
 			output = ft_realloc(output, buffer, 1, 0);
 		}
 		read_result = read(fd, (void *) buffer, BUFFER_SIZE);
-		if ((read_result == -1))// || (read_result == 0 && buffer[0] == '\0'))
+		if ((read_result == -1))
 		{
-			free((void *) output);
+			ft_sfree((void *) output);
 			return ((void*)0);
 		}
 		buffer[read_result] = '\0';
 		if (read_result == 0 && output[0] == 0)
 		{
-			free((void *) output);
+			ft_sfree((void *) output);
 			return ((void*)1);
 		}
 	}
@@ -63,7 +62,7 @@ static char	*ft_found_new_line(char *buffer, char *output)
 	char	*tmp;
 
 	copy_size = (ft_char_in_str(buffer, '\n') - buffer) + 1;
-	tmp = (char *) malloc((sizeof(char) * copy_size) + 1);
+	tmp = (char *) ft_malloc((sizeof(char) * copy_size) + 1);
 	if (!tmp)
 		return (NULL);
 	ft_copy(tmp, buffer, copy_size + 1);

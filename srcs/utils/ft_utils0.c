@@ -73,7 +73,7 @@ char	*ft_string_dup(const char *s)
 {
 	char	*output;
 
-	output = (char *) malloc(ft_strlen(s) + 1);
+	output = (char *) ft_malloc(ft_strlen(s) + 1);
 	if (!output)
 		return (NULL);
 	ft_copy(output, (char *)s, 0);
@@ -86,7 +86,7 @@ char	*ft_get_substring(char const *s, size_t start, size_t len)
 
 	if (!s)
 		return (NULL);
-	substring = (char *) malloc(len + 1);
+	substring = (char *) ft_malloc(len + 1);
 	if (!substring)
 		return (NULL);
 	ft_copy(substring, (char *) &s[start], len + 1);

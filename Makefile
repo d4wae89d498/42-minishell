@@ -58,7 +58,9 @@ SRCS		:=	ft_minishell.c 				\
 				parser/ft_parser4.c 		\
 				parser/ft_parser5.c 		\
 				signals/ft_signals.c 		\
-				signals/ft_signal_handler.c 
+				signals/ft_signal_handler.c \
+				gc/ft_gc.c 					\
+				gc/ft_plst.c 				
 OBJS		:= $(SRCS:%.c=$(OBJ_FOLDER)/%.o)
 
 .SUFIXES:

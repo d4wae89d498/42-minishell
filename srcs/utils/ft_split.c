@@ -20,7 +20,7 @@ char	**ft_split(char const *s, const char c)
 
 	if (!s)
 		return (NULL);
-	array = (char **) malloc((ft_words_in_str(s, c) + 1) * sizeof(char *));
+	array = (char **) ft_malloc((ft_words_in_str(s, c) + 1) * sizeof(char *));
 	if (!array)
 		return (NULL);
 	ft_create_substrings(s, c, array);
@@ -77,10 +77,10 @@ void	ft_free_char_array(char **array)
 	i = 0;
 	while (array && array[i])
 	{
-		free((void *) array[i]);
+		ft_sfree((void *) array[i]);
 		array[i] = NULL;
 		i++;
 	}
-	free((void *) array);
+	ft_sfree((void *) array);
 	array = NULL;
 }

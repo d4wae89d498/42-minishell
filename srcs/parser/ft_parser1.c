@@ -76,7 +76,7 @@ void	ft_found_dollar(t_parse *check, char *input, t_data *data)
 	check->i_string++;
 	check->i += ft_strlen(tmp);
 	check->start = check->i + 1;
-	free((void *) tmp);
+	ft_sfree((void *) tmp);
 }
 
 char	*ft_prepare_output(t_envp *list)
@@ -85,7 +85,7 @@ char	*ft_prepare_output(t_envp *list)
 	t_envp	*tmp;
 
 	tmp = list;
-	output = (char *) malloc(1);
+	output = (char *) ft_malloc(1);
 	output[0] = '\0';
 	while (tmp)
 	{
@@ -105,7 +105,7 @@ char	*ft_get_next_token(t_parser *parser, t_data *data)
 	len = ft_end_of_token(parser->tmp, 0);
 	parser->token = ft_get_substring(parser->tmp, 0, len);
 	output = ft_check_quotes_insert_var(parser, data);
-	free(parser->token);
+	ft_sfree(parser->token);
 	parser->token = NULL;
 	parser->tmp += len;
 	return (output);

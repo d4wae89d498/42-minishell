@@ -27,7 +27,7 @@ int	ft_read_loop(t_data *data)
 			&& (ft_cycle_cmd(data) == RETURN_EXIT))
 			break ;
 		ft_wait_for_kids(data);
-		free((void *) data->r_line);
+		ft_sfree((void *) data->r_line);
 		ft_delete_cmd(&data->c_line);
 	}
 	return (0);

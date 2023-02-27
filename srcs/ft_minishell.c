@@ -18,7 +18,7 @@ static int	ft_set_pwd(t_data *data)
 {
 	char	*output;
 
-	output = (char *) malloc(BUFFER_SIZE);
+	output = (char *) ft_malloc(BUFFER_SIZE);
 	if (!output)
 		return (1);
 	getcwd(output, BUFFER_SIZE);
@@ -35,6 +35,7 @@ static int	ft_initialize(t_data *data, char **envp)
 {
 	t_envp	*tmp_envp;
 
+	data->gclst = 0;
 	data->c_line = NULL;
 	data->r_line = NULL;
 	data->errnum = 0;
@@ -68,9 +69,9 @@ void	ft_clear_mem(t_data *data)
 		ft_delete_cmd(&data->c_line);
 	}
 	rl_clear_history();
-	free((void *) data->pwd);
+	ft_sfree((void *) data->pwd);
 	if (data->r_line)
-		free((void *) data->r_line);
+		ft_sfree((void *) data->r_line);
 	else
 		ft_write_fd(STDOUT_FILENO, "exit\n");
 }

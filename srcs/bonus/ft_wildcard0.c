@@ -94,7 +94,7 @@ char	**ft_get_filter(char *filter)
 	}
 	i--;
 	output[i] = ft_remove_char(output[i], '#');
-	free((void *) filter);
+	ft_sfree((void *) filter);
 	return (output);
 }
 
@@ -116,6 +116,6 @@ t_envp	*ft_get_files(char *path)
 		content = readdir(dir);
 	}
 	closedir(dir);
-	free((void *) path);
+	ft_sfree((void *) path);
 	return (list);
 }
