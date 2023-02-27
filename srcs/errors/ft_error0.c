@@ -50,7 +50,7 @@ int	ft_error_codes(t_command *cmd)
 		ft_write_fd(cmd->fd->out, tmp);
 		ft_write_fd_nl(cmd->fd->out, strerror(i));
 		i++;
-		free((void *) tmp);
+		ft_sfree((void *) tmp);
 	}
 	return (RETURN_SUCCESS);
 }

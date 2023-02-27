@@ -37,13 +37,13 @@ t_envp	*ft_lstnew(char *content)
 {
 	t_envp	*new_element;
 
-	new_element = (t_envp *) malloc(sizeof(t_envp));
+	new_element = (t_envp *) ft_malloc(sizeof(t_envp));
 	if (!new_element)
 		return (NULL);
 	new_element->var = ft_string_dup(content);
 	if (!new_element->var)
 	{
-		free(new_element);
+		ft_sfree(new_element);
 		return (NULL);
 	}
 	new_element->next = NULL;
@@ -78,8 +78,8 @@ void	ft_delete_list(t_envp **lst)
 	{
 		tmp = *lst;
 		*lst = (*lst)->next;
-		free((void *) tmp->var);
-		free((void *) tmp);
+		ft_sfree((void *) tmp->var);
+		ft_sfree((void *) tmp);
 	}
 	*lst = NULL;
 }

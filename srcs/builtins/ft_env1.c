@@ -76,11 +76,11 @@ t_envp	*ft_get_envp_element(t_envp *lst, char *var)
 		var_name = ft_get_var(var);
 		if (ft_str_var_cmp(var_name, tmp->var))
 		{
-			free((void *) var_name);
+			ft_sfree((void *) var_name);
 			return (tmp);
 		}
 		if (var_name)
-			free((void *) var_name);
+			ft_sfree((void *) var_name);
 		tmp = tmp->next;
 	}
 	return (NULL);

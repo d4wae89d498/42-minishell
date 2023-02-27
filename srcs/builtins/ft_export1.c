@@ -47,14 +47,14 @@ void	ft_add_quotes(t_envp *envp)
 			len = 0;
 		if (len > 0)
 		{
-			new_value = (char *) malloc(ft_strlen(tmp->var) + 3);
+			new_value = (char *) ft_malloc(ft_strlen(tmp->var) + 3);
 			len++;
 			ft_copy(new_value, tmp->var, len + 1);
 			ft_copy(&new_value[len], "\"", 0);
 			ft_copy(&new_value[len + 1], &tmp->var[len], 0);
 			len = ft_strlen(new_value);
 			ft_copy(&new_value[len], "\"", 0);
-			free((void *) tmp->var);
+			ft_sfree((void *) tmp->var);
 			tmp->var = new_value;
 		}
 		tmp = tmp->next;

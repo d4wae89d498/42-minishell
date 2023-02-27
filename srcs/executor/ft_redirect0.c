@@ -87,14 +87,14 @@ int	ft_heredoc(t_data *data, int fd_out, char *end_term)
 		user_input = ft_get_next_line(STDIN_FILENO);
 		if (!user_input)
 		{
-			free((void *) tmp);
+			ft_sfree((void *) tmp);
 			close(fd_out);
 			return (RETURN_ERROR);
 		}
 		else if (user_input == (void*)1)
 		{
 			printf("minishell: warning: warning: here-document at line %u delimited by end-of-file (wanted `%s')\n", line, end_term);
-			free(tmp);
+			ft_sfree(tmp);
 			close(fd_out);
 			return (RETURN_SUCCESS);
 		}
@@ -102,11 +102,11 @@ int	ft_heredoc(t_data *data, int fd_out, char *end_term)
 		if (ft_strcmp(user_input, tmp))
 			break ;
 		ft_write_fd(fd_out, user_input);
-		free((void *) user_input);
+		ft_sfree((void *) user_input);
 		line += 1;
 	}
-	free((void *) tmp);
-	free((void *) user_input);
+	ft_sfree((void *) tmp);
+	ft_sfree((void *) user_input);
 	close(fd_out);
 	return (RETURN_SUCCESS);
 }

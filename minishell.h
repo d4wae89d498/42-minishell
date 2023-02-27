@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:07:46 by egiraldi          #+#    #+#             */
-/*   Updated: 2023/02/27 10:11:48 by egiraldi         ###   ########.fr       */
+/*   Updated: 2023/02/27 10:25:29 by egiraldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ typedef struct s_envp {
 	struct s_envp		*next;
 }				t_envp;
 
+typedef struct s_plst
+{
+    void            *data;
+    struct s_plst   *next;
+}				t_plst;
+
 typedef struct s_data {
 	struct s_envp		*envp;
 	struct s_command	*c_line;
@@ -92,6 +98,7 @@ typedef struct s_data {
 	char				*pwd;
 	struct sigaction	response;
 	struct sigaction	child;
+	t_plst				*gclst;
 }				t_data;
 
 typedef struct s_parse {
@@ -336,5 +343,16 @@ t_return		ft_check_element(t_envp *full_list, char **filter,
 //ft_wildcard1.c
 t_envp			*ft_prepare_list(char *input);
 void			ft_get_filter_path(char *input, char **path, char **filter);
+
+//ft_gcc
+t_plst	        *ft_plst_new(void *data);
+void	        ft_plst_add(t_plst **l, t_plst *i);
+void	        ft_plst_del_one(t_plst **l, void *d);
+void	        ft_plst_free(t_plst **l);
+t_plst	        *ft_plst_find(t_plst *l, void *d);
+void            ft_super_exit();
+void            *ft_malloc(size_t size);
+void            ft_sfree(void *ptr);
+void            ft_free_all();
 
 #endif

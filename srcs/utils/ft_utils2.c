@@ -33,7 +33,7 @@ char	*ft_remove_char(char *s, char c)
 	if (count == 0)
 		return (s);
 	tmp = s;
-	output = (char *) malloc((ft_strlen(s) - count) + 1);
+	output = (char *) ft_malloc((ft_strlen(s) - count) + 1);
 	if (!output)
 		return (NULL);
 	i = 0;
@@ -47,7 +47,7 @@ char	*ft_remove_char(char *s, char c)
 		s++;
 	}
 	output[i] = '\0';
-	free((void *) tmp);
+	ft_sfree((void *) tmp);
 	return (output);
 }
 
@@ -88,6 +88,6 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 void	ft_free(void *ptr)
 {
 	if (ptr)
-		free((void *) ptr);
+		ft_sfree((void *) ptr);
 	ptr = NULL;
 }

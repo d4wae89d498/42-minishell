@@ -27,18 +27,18 @@ int	ft_do_execve(t_command *cmd, t_data *data)
 		return (ft_print_error(cmd, ERR_CMD_NOT, NULL));
 	if (cmd->fd->in == RETURN_ERROR)
 	{
-		free(cmd_path);
+		ft_sfree(cmd_path);
 		return (1);
 	}
 	tmp = ft_realloc("_=", cmd_path, 0, 0);
 	ft_change_envp(data, tmp);
-	free(tmp);
+	ft_sfree(tmp);
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 		return (ft_print_error(cmd, errno, NULL));
 	if (cmd->pid == 0)
 		ft_child_process(cmd, data, cmd_path);
-	free((void *) cmd_path);
+	ft_sfree((void *) cmd_path);
 	return (0);
 }
 
@@ -66,9 +66,9 @@ void	ft_child_process(t_command *cmd, t_data *data, char *cmd_path)
 	ft_delete_list(&data->envp);
 	ft_delete_list(&cmd->argv);
 	ft_delete_cmd(&data->c_line);
-	free((void *) data->pwd);
-	free((void *) cmd_path);
-	free((void *) data->r_line);
+	ft_sfree((void *) data->pwd);
+	ft_sfree((void *) cmd_path);
+	ft_sfree((void *) data->r_line);
 	exit(data->errnum);
 }
 
@@ -78,7 +78,7 @@ char	**ft_create_argv_array(t_command *cmd)
 	t_envp	*tmp;
 	int		i;
 
-	output = (char **) malloc((ft_count_of_envp
+	output = (char **) ft_malloc((ft_count_of_envp
 				(cmd->argv) + 2) * sizeof(char *));
 	if (!output)
 		return (NULL);
@@ -101,7 +101,7 @@ char	**ft_create_envp_array(t_envp *envp)
 	t_envp	*tmp;
 	int		i;
 
-	output = (char **) malloc((ft_count_of_envp(envp) + 1) * sizeof(char *));
+	output = (char **) ft_malloc((ft_count_of_envp(envp) + 1) * sizeof(char *));
 	if (!output)
 		return (NULL);
 	tmp = envp;
@@ -135,7 +135,7 @@ char	*ft_check_path(char *cmd, char **paths)
 		{
 			return (test_path);
 		}
-		free((void *) test_path);
+		ft_sfree((void *) test_path);
 		i++;
 	}
 	return (NULL);

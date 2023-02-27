@@ -27,5 +27,5 @@ void	ft_parser_add_argv(t_data *data, t_parser *parser)
 			parser->cmd->result = RETURN_SUCCESS;
 		}
 	}
-	free((void *) tmp);
+	ft_sfree((void *) tmp);
 }

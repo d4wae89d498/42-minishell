@@ -24,7 +24,7 @@ char	*ft_int_to_string(long n)
 		sign = -1;
 	tmp = (long) n * sign;
 	i = ft_get_int_len(tmp, sign);
-	output = (char *) malloc(i + 1);
+	output = (char *) ft_malloc(i + 1);
 	if (!output)
 		return (NULL);
 	output[i--] = '\0';
@@ -91,14 +91,14 @@ char	*ft_realloc(char *s1, char *s2, int free_s1, int free_s2)
 	char		*output;
 
 	s1_len = ft_strlen(s1);
-	output = (char *) malloc(s1_len + ft_strlen(s2) + 1);
+	output = (char *) ft_malloc(s1_len + ft_strlen(s2) + 1);
 	if (!output)
 		return (NULL);
 	ft_copy(output, s1, 0);
 	ft_copy(&output[s1_len], s2, 0);
 	if (free_s1)
-		free((void *) s1);
+		ft_sfree((void *) s1);
 	if (free_s2)
-		free((void *) s2);
+		ft_sfree((void *) s2);
 	return (output);
 }
