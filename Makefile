@@ -6,7 +6,7 @@
 #    By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 09:07:49 by egiraldi          #+#    #+#              #
-#    Updated: 2023/02/27 11:28:25 by egiraldi         ###   ########.fr        #
+#    Updated: 2023/02/27 13:03:34 by egiraldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS		:=	ft_minishell.c 				\
 				utils/ft_utils3.c 			\
 				utils/ft_utils4.c 			\
 				utils/ft_utils5.c 			\
+				utils/ft_utils6.c 			\
 				utils/ft_split.c 			\
 				parser/ft_parser0.c 		\
 				parser/ft_parser1.c 		\

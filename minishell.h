@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:07:46 by egiraldi          #+#    #+#             */
-/*   Updated: 2023/02/27 12:23:00 by egiraldi         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:04:22 by egiraldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,9 @@ void			ft_clear_child_data(t_data *data, char **envp, \
 					char **argv, char *cmd_path);
 int				ft_free_and_ret(char *cmd_path);
 t_return		ft_cd_error_argc(t_command *cmd);
+
+//ft_utils6.c
+void			ft_init_shell_level(t_data *data);
 
 //ft_parser0.c
 void			ft_init_parser(t_parser *parser, t_data *data);

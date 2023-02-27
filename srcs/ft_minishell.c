@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:58:57 by egiraldi          #+#    #+#             */
-/*   Updated: 2023/02/27 09:10:27 by egiraldi         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:21:32 by egiraldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static int	ft_initialize(t_data *data, char **envp)
 	if (!tmp_envp)
 		ft_change_envp(data, DEFAULT_PATH);
 	tmp_envp = ft_get_envp_element(data->envp, "PWD");
+	ft_init_shell_level(data);
 	if (!tmp_envp)
 		ft_set_pwd(data);
 	else

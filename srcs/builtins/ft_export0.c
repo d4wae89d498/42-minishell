@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:07:19 by egiraldi          #+#    #+#             */
-/*   Updated: 2023/02/27 09:10:27 by egiraldi         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:18:23 by egiraldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,9 @@ int	ft_change_envp(t_data *data, char *var)
 	{
 		ft_sfree((void *) tmp->var);
 		tmp->var = ft_string_dup(var);
-		if (!tmp->var)
-			return (1);
 	}
-	else if (!ft_lstadd_back(&data->envp, ft_lstnew(var)))
-	{
-		return (1);
-	}
+	else
+		ft_lstadd_back(&data->envp, ft_lstnew(var));
 	return (0);
 }
 
