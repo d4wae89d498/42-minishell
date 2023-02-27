@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:24:08 by egiraldi          #+#    #+#             */
-/*   Updated: 2023/02/27 13:26:20 by egiraldi         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:06:08 by egiraldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ void	ft_init_shell_level(t_data *data)
 		ft_utoa(buffer, shlvl);
 		newshlvl = ft_realloc("SHLVL=", buffer, 0, 0);
 		ft_change_envp(data, newshlvl);
+		ft_sfree(newshlvl);
 	}
 }
