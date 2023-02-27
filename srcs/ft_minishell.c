@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:58:57 by egiraldi          #+#    #+#             */
-/*   Updated: 2023/02/27 13:21:32 by egiraldi         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:07:43 by egiraldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	ft_clear_mem(t_data *data)
 		ft_sfree((void *) data->r_line);
 	else
 		ft_write_fd(STDOUT_FILENO, "exit\n");
+	ft_plst_free(&(data->gclst));
 }
 
 int	main(int argc, char **argv, char **envp)
