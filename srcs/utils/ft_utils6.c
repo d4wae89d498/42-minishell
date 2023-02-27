@@ -70,5 +70,6 @@ void	ft_init_shell_level(t_data *data)
 		ft_utoa(buffer, shlvl);
 		newshlvl = ft_realloc("SHLVL=", buffer, 0, 0);
 		ft_change_envp(data, newshlvl);
+		ft_sfree(newshlvl);
 	}
 }
