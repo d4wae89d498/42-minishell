@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:07:46 by egiraldi          #+#    #+#             */
-/*   Updated: 2023/02/27 09:15:39 by egiraldi         ###   ########.fr       */
+/*   Updated: 2023/02/27 10:11:48 by egiraldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void			ft_parent_sigterm(int sign);
 void			ft_clear_mem(t_data *data);
 
 //ft_read_loop.c
-int 			ft_read_loop(t_data *data);
+int				ft_read_loop(t_data *data);
 int				ft_cycle_cmd(t_data *data);
 void			ft_wait_for_kids(t_data *data);
 
