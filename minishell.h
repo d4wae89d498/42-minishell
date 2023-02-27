@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/27 09:07:46 by egiraldi          #+#    #+#             */
+/*   Updated: 2023/02/27 09:15:39 by egiraldi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include <unistd.h>
@@ -98,10 +110,11 @@ typedef struct s_parser {
 	int					result;
 }				t_parser;
 
-void	ft_parent_sigterm(int sign);
+extern t_data	*g_data;
+
+void			ft_parent_sigterm(int sign);
 
 //ft_minishell.c
-extern t_data	*g_data;
 void			ft_clear_mem(t_data *data);
 
 //ft_read_loop.c

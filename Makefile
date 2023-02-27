@@ -1,5 +1,15 @@
-#valgrind --leak-check=full --show-leak-kinds=all --ignore-fn=readline ./minishell
-#valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/02/27 09:07:49 by egiraldi          #+#    #+#              #
+#    Updated: 2023/02/27 09:08:55 by egiraldi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		:=	minishell
 
 CC			:=	gcc
@@ -70,11 +80,4 @@ fclean: clean
 
 re: fclean all
 
-norm:
-	cd srcs && norminette -R CheckForbiddenSourceHeader $(SRCS)
-	norminette -R CheckForbiddenSourceHeader $(HEADERFILE)
-	
-val:
-	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes -s ./minishell
-
-.PHONY: clean fclean re val norm
+.PHONY: all clean fclean re
