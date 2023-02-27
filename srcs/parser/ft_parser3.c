@@ -21,7 +21,6 @@ t_return	ft_do_valid_redirections(t_data *data)
 	}
 	cmd_tmp = data->c_line;
 	ft_do_redirections(cmd_tmp, re_tmp);
-	printf("ok\n");
 	return (RETURN_SUCCESS);
 }
 

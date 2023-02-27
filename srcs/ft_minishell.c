@@ -1,5 +1,7 @@
 #include "../minishell.h"
 
+t_data	*g_data;
+
 static int	ft_set_pwd(t_data *data)
 {
 	char	*output;
@@ -42,7 +44,6 @@ static int	ft_initialize(t_data *data, char **envp)
 	return (ft_change_envp(data, "SHELL=EZIO & MARC MINISHELL!"));
 }
 
-// TODO : fixme
 void	ft_clear_mem(t_data *data)
 {
 	t_command	*tmp;
@@ -68,6 +69,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
+	g_data = &data;
 	if (!ft_initialize(&data, envp))
 	{
 		ft_set_parent_interactive();
@@ -75,7 +77,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	else
 	{
-		printf("Allocation error.\n");
+		ft_write_fd(STDERR_FILENO, "Allocation error.\n");
 		data.errnum = 1;
 	}
 	ft_clear_mem(&data);

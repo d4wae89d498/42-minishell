@@ -30,3 +30,11 @@ void	ft_err_file(t_command *cmd)
 	ft_write_fd(cmd->fd->err, ": No such file or directory\n");
 	cmd->errnum = 127;
 }
+
+void	ft_err_cd_tooarg(t_command *cmd)
+{
+	ft_write_fd(cmd->fd->err, PROMPT);
+	ft_write_fd(cmd->fd->err, cmd->cmd);
+	ft_write_fd(cmd->fd->err, ": too many arguments\n");
+	cmd->errnum = 1;
+}

@@ -97,7 +97,11 @@ typedef struct s_parser {
 	int					inside_echo;
 	int					result;
 }				t_parser;
+
+void	ft_parent_sigterm(int sign);
+
 //ft_minishell.c
+extern t_data	*g_data;
 void			ft_clear_mem(t_data *data);
 
 //ft_read_loop.c
@@ -133,6 +137,7 @@ void			ft_err_cd_folder(t_command *cmd, char *token);
 void			ft_err_else(t_command *cmd, int errnum);
 void			ft_err_fd(t_command *cmd, char *token);
 void			ft_err_file(t_command *cmd);
+void			ft_err_cd_tooarg(t_command *cmd);
 
 //ft_utils0.c
 size_t			ft_strlen(const char *s);

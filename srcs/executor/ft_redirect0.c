@@ -2,18 +2,15 @@
 
 t_return	ft_redirect_in(t_command *cmd, t_re *re)
 {
-	if (!re->next)
+	if (cmd->fd->in > 2)
+		close(cmd->fd->in);
+	cmd->fd->in = open(re->file, O_RDONLY);
+	if (cmd->fd->in < 0)
 	{
-		if (cmd->fd->in > 2)
-			close(cmd->fd->in);
-		cmd->fd->in = open(re->file, O_RDONLY);
-		if (cmd->fd->in < 0)
-		{
-			ft_print_error(cmd, ERR_FD, re->file);
-			return (RETURN_ERROR);
-		}
+		ft_print_error(cmd, ERR_FD, re->file);
+		return (RETURN_ERROR);
 	}
-	else if (access(re->file, R_OK) == RETURN_ERROR)
+	if (access(re->file, R_OK) == RETURN_ERROR)
 	{
 		ft_print_error(cmd, ERR_FD, re->file);
 		return (RETURN_ERROR);
@@ -84,7 +81,7 @@ int	ft_heredoc(t_data *data, int fd_out, char *end_term)
 		}
 		else if (user_input == (void*)1)
 		{
-			printf(" minishell: warning: warning: here-document at line %u delimited by end-of-file (wanted `%s')\n", line, end_term);
+			printf("minishell: warning: warning: here-document at line %u delimited by end-of-file (wanted `%s')\n", line, end_term);
 			free(tmp);
 			close(fd_out);
 			return (RETURN_SUCCESS);

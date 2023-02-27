@@ -11,7 +11,12 @@ int	ft_cd(t_data *data, t_command *cmd)
 	struct stat	path_check;
 
 	if (!cmd->argv)
+		cmd->argv = ft_lstnew(ft_getenv("HOME", data->envp));
+	if (cmd->argv->next)
+	{
+		ft_err_cd_tooarg(cmd);
 		return (RETURN_ERROR);
+	}
 	if (lstat(cmd->argv->var, &path_check) == RETURN_ERROR)
 		return (ft_print_error(cmd, ERR_CD_FOLDER, cmd->argv->var));
 	cmd->errnum = 0;
