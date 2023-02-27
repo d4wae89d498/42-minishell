@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:59:56 by egiraldi          #+#    #+#             */
-/*   Updated: 2023/02/27 09:10:27 by egiraldi         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:17:57 by egiraldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ int	ft_do_execve(t_command *cmd, t_data *data)
 	if (!cmd_path)
 		return (ft_print_error(cmd, ERR_CMD_NOT, NULL));
 	if (cmd->fd->in == RETURN_ERROR)
-	{
-		ft_sfree(cmd_path);
-		return (1);
-	}
+		return (ft_free_and_ret(cmd_path));
 	tmp = ft_realloc("_=", cmd_path, 0, 0);
 	ft_change_envp(data, tmp);
 	ft_sfree(tmp);
@@ -58,17 +55,10 @@ void	ft_child_process(t_command *cmd, t_data *data, char *cmd_path)
 		printf("minishell: %s: Permission denied\n", cmd_path);
 		data->errnum = 126;
 	}
-	else if (execve(cmd_path, argv, envp) == RETURN_ERROR)
-	{};//	ft_print_error(cmd, errno, NULL);
+	execve(cmd_path, argv, envp);
 	ft_close_pipe(cmd);
-	ft_free_char_array(envp);
-	ft_free_char_array(argv);
-	ft_delete_list(&data->envp);
 	ft_delete_list(&cmd->argv);
-	ft_delete_cmd(&data->c_line);
-	ft_sfree((void *) data->pwd);
-	ft_sfree((void *) cmd_path);
-	ft_sfree((void *) data->r_line);
+	ft_clear_child_data(data, envp, argv, cmd_path);
 	exit(data->errnum);
 }
 

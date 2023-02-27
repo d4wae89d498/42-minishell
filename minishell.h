@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:07:46 by egiraldi          #+#    #+#             */
-/*   Updated: 2023/02/27 10:25:29 by egiraldi         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:23:00 by egiraldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,9 @@ typedef struct s_envp {
 	struct s_envp		*next;
 }				t_envp;
 
-typedef struct s_plst
-{
-    void            *data;
-    struct s_plst   *next;
+typedef struct s_plst {
+	void				*data;
+	struct s_plst		*next;
 }				t_plst;
 
 typedef struct s_data {
@@ -195,6 +194,10 @@ char			*ft_strnstr(const char *big, const char *little, size_t len);
 
 //ft_utils5.c
 size_t			ft_replace_in_string(char *s, char c_replace, char c_with);
+void			ft_clear_child_data(t_data *data, char **envp, \
+					char **argv, char *cmd_path);
+int				ft_free_and_ret(char *cmd_path);
+t_return		ft_cd_error_argc(t_command *cmd);
 
 //ft_parser0.c
 void			ft_init_parser(t_parser *parser, t_data *data);
@@ -328,6 +331,9 @@ int				ft_get_re(t_data *data, t_parser *parser);
 
 //ft_redirect2.c
 void			ft_do_redirections(t_command *cmd, t_re *re);
+t_return		ft_error_heredoc_b(char *tmp, int fd_out, \
+					unsigned int line, char *end_term);
+t_return		ft_error_heredoc_a(char *tmp, int fd_out);
 
 //ft_get_next_line.c
 char			*ft_get_next_line(int fd);
@@ -345,14 +351,15 @@ t_envp			*ft_prepare_list(char *input);
 void			ft_get_filter_path(char *input, char **path, char **filter);
 
 //ft_gcc
-t_plst	        *ft_plst_new(void *data);
-void	        ft_plst_add(t_plst **l, t_plst *i);
-void	        ft_plst_del_one(t_plst **l, void *d);
-void	        ft_plst_free(t_plst **l);
-t_plst	        *ft_plst_find(t_plst *l, void *d);
-void            ft_super_exit();
-void            *ft_malloc(size_t size);
-void            ft_sfree(void *ptr);
-void            ft_free_all();
+t_plst			*ft_plst_new(void *data);
+void			ft_plst_add(t_plst **l, t_plst *i);
+void			ft_plst_del_one(t_plst **l, void *d);
+void			ft_plst_free(t_plst **l);
+t_plst			*ft_plst_find(t_plst *l, void *d);
+void			ft_super_exit(void);
+void			*ft_malloc(size_t size);
+void			ft_sfree(void *ptr);
+void			ft_free_all(void);
+void			ft_handle_first(t_plst **l);
 
 #endif

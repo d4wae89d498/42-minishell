@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:59:05 by egiraldi          #+#    #+#             */
-/*   Updated: 2023/02/27 09:10:27 by egiraldi         ###   ########.fr       */
+/*   Updated: 2023/02/27 10:55:35 by egiraldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ static char	*ft_gnl_handling(char *buffer, int fd, char *output)
 		if ((read_result == -1))
 		{
 			ft_sfree((void *) output);
-			return ((void*)0);
+			return ((void *) 0);
 		}
 		buffer[read_result] = '\0';
 		if (read_result == 0 && output[0] == 0)
 		{
 			ft_sfree((void *) output);
-			return ((void*)1);
+			return ((void *) 1);
 		}
 	}
 }

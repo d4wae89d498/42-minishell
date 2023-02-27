@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:00:03 by egiraldi          #+#    #+#             */
-/*   Updated: 2023/02/27 09:10:27 by egiraldi         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:14:34 by egiraldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ t_return	ft_redirect_out_out(t_command *cmd, t_re *re)
 
 int	ft_heredoc(t_data *data, int fd_out, char *end_term)
 {
-	char		*user_input;
-	char		*tmp;
-	unsigned	line;
+	char			*user_input;
+	char			*tmp;
+	unsigned int	line;
 
 	line = 1;
 	tmp = ft_realloc(end_term, "\n", 0, 0);
@@ -86,18 +86,9 @@ int	ft_heredoc(t_data *data, int fd_out, char *end_term)
 		ft_write_fd(STDOUT_FILENO, "> ");
 		user_input = ft_get_next_line(STDIN_FILENO);
 		if (!user_input)
-		{
-			ft_sfree((void *) tmp);
-			close(fd_out);
-			return (RETURN_ERROR);
-		}
-		else if (user_input == (void*)1)
-		{
-			printf("minishell: warning: warning: here-document at line %u delimited by end-of-file (wanted `%s')\n", line, end_term);
-			ft_sfree(tmp);
-			close(fd_out);
-			return (RETURN_SUCCESS);
-		}
+			return (ft_error_heredoc_a(tmp, fd_out));
+		else if (user_input == (void *) 1)
+			return (ft_error_heredoc_b(tmp, fd_out, line, end_term));
 		user_input = ft_check_dollar_in_heredoc(user_input, data);
 		if (ft_strcmp(user_input, tmp))
 			break ;

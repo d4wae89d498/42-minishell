@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_plst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 10:20:48 by mafaussu          #+#    #+#             */
-/*   Updated: 2023/02/27 10:20:49 by mafaussu         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:37:12 by egiraldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
 
 t_plst	*ft_plst_new(void *data)
 {
@@ -69,14 +68,8 @@ void	ft_plst_del_one(t_plst **l, void *d)
 
 	if (!(*l))
 		return ;
-	if ((*l)->data == d) 
-	{
-		it = *l;
-		*l = (*l)->next;
-		free(it->data);
-		free(it);
-		return ;
-	}
+	if ((*l)->data == d)
+		return (ft_handle_first(l));
 	it = (*l)->next;
 	prev = *l;
 	while (it)
@@ -92,7 +85,6 @@ void	ft_plst_del_one(t_plst **l, void *d)
 		it = it->next;
 	}
 }
-
 
 void	ft_plst_free(t_plst **l)
 {

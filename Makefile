@@ -6,7 +6,7 @@
 #    By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 09:07:49 by egiraldi          #+#    #+#              #
-#    Updated: 2023/02/27 09:08:55 by egiraldi         ###   ########.fr        #
+#    Updated: 2023/02/27 11:28:25 by egiraldi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,8 @@ SRCS		:=	ft_minishell.c 				\
 				signals/ft_signals.c 		\
 				signals/ft_signal_handler.c \
 				gc/ft_gc.c 					\
-				gc/ft_plst.c 				
+				gc/ft_plst.c 				\
+				gc/ft_plst1.c
 OBJS		:= $(SRCS:%.c=$(OBJ_FOLDER)/%.o)
 
 .SUFIXES:

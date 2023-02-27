@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:07:04 by egiraldi          #+#    #+#             */
-/*   Updated: 2023/02/27 09:10:27 by egiraldi         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:23:27 by egiraldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ int	ft_cd(t_data *data, t_command *cmd)
 	if (!cmd->argv)
 		cmd->argv = ft_lstnew(ft_getenv("HOME", data->envp));
 	if (cmd->argv->next)
-	{
-		ft_err_cd_tooarg(cmd);
-		return (RETURN_ERROR);
-	}
+		return (ft_cd_error_argc(cmd));
 	if (lstat(cmd->argv->var, &path_check) == RETURN_ERROR)
 		return (ft_print_error(cmd, ERR_CD_FOLDER, cmd->argv->var));
 	cmd->errnum = 0;
