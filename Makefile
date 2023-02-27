@@ -20,14 +20,11 @@ SRCS		:=	ft_minishell.c 				\
 				builtins/ft_export1.c 		\
 				builtins/ft_pwd.c 			\
 				builtins/ft_unset.c 		\
-											\
 				bonus/ft_wildcard0.c 		\
 				bonus/ft_wildcard1.c 		\
-											\
 				errors/ft_error0.c 			\
 				errors/ft_error1.c 			\
 				errors/ft_error2.c 			\
-											\
 				executor/ft_read_loop.c 	\
 				executor/ft_commands0.c 	\
 				executor/ft_commands1.c 	\
@@ -36,7 +33,6 @@ SRCS		:=	ft_minishell.c 				\
 				executor/ft_redirect0.c 	\
 				executor/ft_redirect1.c 	\
 				executor/ft_redirect2.c 	\
-											\
 				utils/ft_get_next_line.c 	\
 				utils/ft_utils0.c 			\
 				utils/ft_utils1.c 			\
@@ -51,17 +47,18 @@ SRCS		:=	ft_minishell.c 				\
 				parser/ft_parser3.c 		\
 				parser/ft_parser4.c 		\
 				parser/ft_parser5.c 		\
-											\
 				signals/ft_signals.c 		\
 				signals/ft_signal_handler.c 
 OBJS		:= $(SRCS:%.c=$(OBJ_FOLDER)/%.o)
+
+.SUFIXES:
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -L/usr/local/opt/readline/lib -lreadline -o $(NAME)
 
-$(OBJS): $(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.c $(HEADERFILE)
+$(OBJS): $(OBJ_FOLDER)/%.o: $(SRC_FOLDER)/%.c $(HEADERFILE) Makefile
 	@mkdir -p $(@D)
 	$(CC) -c $(CFLAGS) -I/usr/local/opt/readline/include/ -o $@ $<
 
@@ -78,6 +75,6 @@ norm:
 	norminette -R CheckForbiddenSourceHeader $(HEADERFILE)
 	
 val:
-	valgrind --leak-check=full --trace-children=yes --track-fds=yes -s ./minishell
+	valgrind --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes -s ./minishell
 
-.PHONY: clean fclean re
+.PHONY: clean fclean re val norm

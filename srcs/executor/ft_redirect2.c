@@ -9,8 +9,13 @@ void	ft_do_redirections(t_command *cmd, t_re *re)
 		{
 			if (ft_strcmp(re->direct, "<"))
 			{
+				printf("a");
 				if (ft_redirect_(cmd, re, ft_redirect_in) == RETURN_ERROR)
+				{
+					printf("b");
+
 					break ;
+				}
 			}
 			else if (ft_strcmp(re->direct, ">"))
 			{

@@ -17,6 +17,7 @@ char	*ft_get_next_line(int fd)
 	return (ft_gnl_handling(buffer, fd, output));
 }
 
+// todo : 3 return values
 static char	*ft_gnl_handling(char *buffer, int fd, char *output)
 {
 	ssize_t	read_result;
@@ -30,14 +31,17 @@ static char	*ft_gnl_handling(char *buffer, int fd, char *output)
 			output = ft_realloc(output, buffer, 1, 0);
 		}
 		read_result = read(fd, (void *) buffer, BUFFER_SIZE);
-		if (read_result == -1 || (read_result == 0 && output[0] == '\0'))
+		if ((read_result == -1))// || (read_result == 0 && buffer[0] == '\0'))
 		{
 			free((void *) output);
-			return (NULL);
+			return ((void*)0);
 		}
 		buffer[read_result] = '\0';
-		if (read_result == 0)
-			return (output);
+		if (read_result == 0 && output[0] == 0)
+		{
+			free((void *) output);
+			return ((void*)1);
+		}
 	}
 }
 

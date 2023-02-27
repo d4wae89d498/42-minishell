@@ -97,9 +97,7 @@ typedef struct s_parser {
 	int					inside_echo;
 	int					result;
 }				t_parser;
-
 //ft_minishell.c
-int				ft_initialize(t_data *data, char **envp);
 void			ft_clear_mem(t_data *data);
 
 //ft_read_loop.c
@@ -176,7 +174,7 @@ size_t			ft_replace_in_string(char *s, char c_replace, char c_with);
 //ft_parser0.c
 void			ft_init_parser(t_parser *parser, t_data *data);
 int				ft_check_heredoc_end_term(char *s);
-void			ft_parser(t_data *data);
+int				ft_parser(t_data *data);
 int				ft_end_of_token(char *s, int *inside_echo);
 int				ft_find_end_of_token(char *s, int *inside_echo);
 
@@ -301,7 +299,7 @@ t_re			*ft_lstnew_re(char *direct, char *file);
 t_re			*ft_lstlast_re(t_re *lst);
 void			ft_lstadd_back_re(t_re **lst, t_re *new);
 void			ft_lstdel_re(t_re **re);
-void			ft_get_re(t_data *data, t_parser *parser);
+int				ft_get_re(t_data *data, t_parser *parser);
 
 //ft_redirect2.c
 void			ft_do_redirections(t_command *cmd, t_re *re);

@@ -66,9 +66,11 @@ t_return	ft_redirect_out_out(t_command *cmd, t_re *re)
 
 int	ft_heredoc(t_data *data, int fd_out, char *end_term)
 {
-	char	*user_input;
-	char	*tmp;
+	char		*user_input;
+	char		*tmp;
+	unsigned	line;
 
+	line = 1;
 	tmp = ft_realloc(end_term, "\n", 0, 0);
 	while (1)
 	{
@@ -80,11 +82,19 @@ int	ft_heredoc(t_data *data, int fd_out, char *end_term)
 			close(fd_out);
 			return (RETURN_ERROR);
 		}
+		else if (user_input == (void*)1)
+		{
+			printf(" minishell: warning: warning: here-document at line %u delimited by end-of-file (wanted `%s')\n", line, end_term);
+			free(tmp);
+			close(fd_out);
+			return (RETURN_SUCCESS);
+		}
 		user_input = ft_check_dollar_in_heredoc(user_input, data);
 		if (ft_strcmp(user_input, tmp))
 			break ;
 		ft_write_fd(fd_out, user_input);
 		free((void *) user_input);
+		line += 1;
 	}
 	free((void *) tmp);
 	free((void *) user_input);

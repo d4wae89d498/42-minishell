@@ -4,6 +4,7 @@ int	ft_do_execve(t_command *cmd, t_data *data)
 {
 	char	**paths;
 	char	*cmd_path;
+	char	*tmp;
 
 	paths = ft_split(ft_getenv("PATH", data->envp), ':');
 	if (!paths)
@@ -17,7 +18,9 @@ int	ft_do_execve(t_command *cmd, t_data *data)
 		free(cmd_path);
 		return (1);
 	}
-	ft_change_envp(data, ft_realloc("_=", cmd_path, 0, 0));
+	tmp = ft_realloc("_=", cmd_path, 0, 0);
+	ft_change_envp(data, tmp);
+	free(tmp);
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 		return (ft_print_error(cmd, errno, NULL));
@@ -32,13 +35,19 @@ void	ft_child_process(t_command *cmd, t_data *data, char *cmd_path)
 	char	**envp;
 	char	**argv;
 
+	data->errnum = 0;
 	ft_set_child_active();
 	ft_connect_pipe(cmd);
 	ft_close_child_fd(cmd, data);
 	envp = ft_create_envp_array(data->envp);
 	argv = ft_create_argv_array(cmd);
-	if (execve(cmd_path, argv, envp) == RETURN_ERROR)
-		ft_print_error(cmd, errno, NULL);
+	if (access(cmd_path, F_OK | X_OK | R_OK) != RETURN_SUCCESS)
+	{
+		printf("minishell: %s: Permission denied\n", cmd_path);
+		data->errnum = 126;
+	}
+	else if (execve(cmd_path, argv, envp) == RETURN_ERROR)
+	{};//	ft_print_error(cmd, errno, NULL);
 	ft_close_pipe(cmd);
 	ft_free_char_array(envp);
 	ft_free_char_array(argv);
@@ -47,7 +56,8 @@ void	ft_child_process(t_command *cmd, t_data *data, char *cmd_path)
 	ft_delete_cmd(&data->c_line);
 	free((void *) data->pwd);
 	free((void *) cmd_path);
-	exit(0);
+	free((void *) data->r_line);
+	exit(data->errnum);
 }
 
 char	**ft_create_argv_array(t_command *cmd)
@@ -110,7 +120,9 @@ char	*ft_check_path(char *cmd, char **paths)
 		test_path = ft_realloc(paths[i], "/", 0, 0);
 		test_path = ft_realloc(test_path, cmd, 1, 0);
 		if (access(test_path, F_OK) == RETURN_SUCCESS)
+		{
 			return (test_path);
+		}
 		free((void *) test_path);
 		i++;
 	}

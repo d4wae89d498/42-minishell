@@ -9,7 +9,8 @@ int	ft_read_loop(t_data *data)
 			break ;
 		if (ft_strlen(data->r_line) > 0)
 			add_history(data->r_line);
-		ft_parser(data);
+		if (ft_parser(data))
+			continue ;
 		if ((ft_do_valid_redirections(data) == RETURN_SUCCESS)
 			&& (ft_cycle_cmd(data) == RETURN_EXIT))
 			break ;

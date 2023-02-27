@@ -29,6 +29,11 @@ t_envp	*ft_lstnew(char *content)
 	if (!new_element)
 		return (NULL);
 	new_element->var = ft_string_dup(content);
+	if (!new_element->var)
+	{
+		free(new_element);
+		return (NULL);
+	}
 	new_element->next = NULL;
 	return (new_element);
 }

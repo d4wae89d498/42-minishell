@@ -3,6 +3,7 @@
 int	ft_export(t_data *data, t_command *cmd)
 {
 	t_envp	*tmp;
+//	char	*prev_var;
 
 	if (!cmd->argv)
 		ft_var_printing(data);
@@ -14,7 +15,9 @@ int	ft_export(t_data *data, t_command *cmd)
 			ft_print_error(cmd, ERR_NOT_VALID, tmp->var);
 		}
 		else if (cmd == data->c_line)
+		{
 			ft_change_envp(data, tmp->var);
+		}
 		tmp = tmp->next;
 	}
 	return (RETURN_SUCCESS);
@@ -23,20 +26,17 @@ int	ft_export(t_data *data, t_command *cmd)
 int	ft_change_envp(t_data *data, char *var)
 {
 	t_envp	*tmp;
-	char	*out;
 
-	out = ft_string_dup(var);
-	if (!out)
-		return (1);
 	tmp = ft_get_envp_element(data->envp, var);
 	if (tmp)
 	{
 		free((void *) tmp->var);
-		tmp->var = out;
+		tmp->var = ft_string_dup(var);
+		if (!tmp->var)
+			return (0);
 	}
-	else if (!ft_lstadd_back(&data->envp, ft_lstnew(out)))
+	else if (!ft_lstadd_back(&data->envp, ft_lstnew(var)))
 	{
-		free(out);
 		return (1);
 	}
 	return (0);

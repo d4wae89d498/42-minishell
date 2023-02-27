@@ -50,7 +50,7 @@ void	ft_lstdel_re(t_re **re)
 	*re = NULL;
 }
 
-void	ft_get_re(t_data *data, t_parser *parser)
+int	ft_get_re(t_data *data, t_parser *parser)
 {
 	char	*file;
 	char	*direct;
@@ -58,7 +58,16 @@ void	ft_get_re(t_data *data, t_parser *parser)
 	direct = parser->token;
 	parser->token = NULL;
 	file = ft_get_next_token(parser, data);
+	if (!*file)
+	{
+		free((void *) direct);
+		free((void *) file);
+		data->errnum = 2;
+		printf("minishell: syntax error near unexpected token `newline'\n");
+		return (1);
+	}
 	ft_lstadd_back_re(&parser->cmd->re, ft_lstnew_re(direct, file));
 	free((void *) direct);
 	free((void *) file);
+	return (0);
 }
